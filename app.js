@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, View, Button } from "react-native";
+import { AppRegistry, StyleSheet, Text, TextInput, View, Button } from "react-native";
 
 export default class App extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export default class App extends Component {
     this.onPressIncrement = this.onPressIncrement.bind(this);
     this.onPressDecrement = this.onPressDecrement.bind(this);
     this.onPressClear = this.onPressClear.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
   }
 
   onPressIncrement() {
@@ -24,11 +25,21 @@ export default class App extends Component {
     this.setState({ count: 0 });
   }
 
+  onChangeText(number) {
+    const count = parseInt(number);
+    this.setState({count});
+  }
+
   render() {
     const { container, countViewStyle, welcome } = styles;
     return (
       <View style={container}>
-        <View style={countViewStyle}>
+          <TextInput          
+            style={{width: 40, height: 40, borderWidth: 1}}
+            onChangeText={this.onChangeText}
+            value={this.state.count.toString()}
+           />
+        <View style={countViewStyle}> 
           <Button onPress={this.onPressIncrement} title="+" />
           <Text style={welcome}>
             {this.state.count}
