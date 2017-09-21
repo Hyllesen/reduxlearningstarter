@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button } from "react-native";
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +43,7 @@ export default class App extends Component {
         <View style={countViewStyle}> 
           <Button onPress={this.onPressIncrement} title="+" />
           <Text style={welcome}>
-            {this.state.count}
+            {this.props.count}
           </Text>
           <Button onPress={this.onPressDecrement} title="-" />
         </View>
@@ -73,3 +74,11 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   }
 });
+
+function mapStateToProps(state) {
+  return {
+    count: state
+  };
+}
+
+export default connect(mapStateToProps, null)(App);
