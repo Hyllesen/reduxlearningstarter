@@ -16,7 +16,9 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);    
     const { container, countViewStyle, welcome } = styles;
+    const { helloText } = this.props.hello;
     return (
       <View style={container}>
           <TextInput          
@@ -32,6 +34,9 @@ class App extends Component {
           <Button onPress={this.props.counterDecrement} title="-" />
         </View>
         <Button onPress={this.props.counterClear} title="Clear" />
+        <Text>
+          {helloText}
+        </Text>
       </View>
     );
   }
@@ -61,7 +66,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    count: state
+    count: state.counter,
+    hello: state.hello
   };
 }
 
